@@ -1,0 +1,19 @@
+.header {
+  padding: 18px 0;
+  box-sizing: border-box;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  column-gap: 44px;
+}
+.header_pos_promo {
+  background-color: #073042;
+}
+.header__logo {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+}
+

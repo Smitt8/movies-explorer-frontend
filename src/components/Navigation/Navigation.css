@@ -1,0 +1,41 @@
+.navigation {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation_pos_promo {
+  justify-content: flex-end;
+}
+
+.navigation__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation___list_type_movies {
+  max-width: 400px;
+  column-gap: 10px;
+}
+.navigation__list_type_auth {
+  column-gap: 30px;
+}
+
+.navigation__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.navigation__link_type_signin {
+  background-color: #3DDC84;
+  border-radius: 3px;
+  padding: 8px 20px;
+  color: #000;
+}
