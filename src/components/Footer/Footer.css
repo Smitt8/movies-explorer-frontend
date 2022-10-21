@@ -36,7 +36,6 @@
 .footer__copyright {
   margin: 0;
   padding: 0;
-  opacity: .13;
 }
 
 .footer__nav {
@@ -50,5 +49,9 @@
 .footer__link {
   text-decoration: none;
   color: #fff;
-  opacity: .1;
+  cursor: pointer;
+}
+
+.footer__link:hover {
+  opacity: .6;
 }

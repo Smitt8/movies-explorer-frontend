@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation({ loggedIn }) {
@@ -22,16 +22,20 @@ function Navigation({ loggedIn }) {
         <Route>
           <ul className='navigation__list navigation___list_type_movies'>
             <li>
-              <a className='navigation__link' href='#'>
+              <Link className='navigation__link' to='/movies'>
                 Фильмы
-              </a>
+              </Link>
             </li>
             <li>
-              <a className='navigation__link' href='#'>
+              <Link className='navigation__link' to='/'>
                 Сохраненные фильмы
-              </a>
+              </Link>
             </li>
           </ul>
+            <Link className='navigation__account' to='/'>
+              Аккаунт
+              <button className='navigation__button'></button>
+            </Link>
         </Route>
       </Switch>
     </nav>

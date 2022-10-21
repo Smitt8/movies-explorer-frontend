@@ -33,9 +33,41 @@
   color: #fff;
 }
 
+.navigation__link:hover {
+  opacity: .6;
+}
+
 .navigation__link_type_signin {
   background-color: #3DDC84;
   border-radius: 3px;
   padding: 8px 20px;
   color: #000;
+}
+
+.navigation__account {
+  display: flex;
+  align-items: center;
+  column-gap: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+
+.navigation__account:hover {
+  opacity: .6;
+}
+
+.navigation__button {
+  width: 30px;
+  height: 30px;
+  background-color: #313131;
+  background-image: url(../../images/account.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }

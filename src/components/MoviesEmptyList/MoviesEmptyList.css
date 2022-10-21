@@ -1,0 +1,19 @@
+.empty-list {
+  min-width: 320px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 70px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-list__text {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #fff;
+}
