@@ -1,0 +1,8 @@
+.saved-movies {
+  display: flex;
+  flex-direction: column;
+}
+
+.saved-movies_state_empty {
+  height: calc(100vh - 78px - 172px);
+}

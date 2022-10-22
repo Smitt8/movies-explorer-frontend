@@ -1,17 +1,21 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesEmptyList from '../MoviesEmptyList/MoviesEmptyList';
-import moviesData from '../../utils/moviesData';
 import './Movies.css';
 
-function Movies() {
+function Movies({ moviesData, savedMoviesData }) {
   // const moviesData = [];
   const movieStyle = moviesData.length === 0 ? 'movies_state_empty' : '';
+  const movies = moviesData.map(m => {
+    return {
+      ...m,
+      saved: savedMoviesData.some((i) => i.movieId === m._id),
+  }});
   return (
     <main className={`movies ${movieStyle}`}>
       <SearchForm />
       {moviesData.length > 0 ? (
-        <MoviesCardList moviesData={moviesData} />
+        <MoviesCardList isSaved={false} moviesData={movies} />
       ) : (
         <MoviesEmptyList text='Ничего не найдено' />
       )}

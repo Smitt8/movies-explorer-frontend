@@ -4,6 +4,9 @@ import Main from '../Main/Main';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+
+import {moviesData, savedMoviesData} from '../../utils/moviesData';
 
 function App() {
   return (
@@ -14,7 +17,10 @@ function App() {
         <Main />
       </Route>
       <Route path='/movies'>
-        <Movies />
+        <Movies moviesData={moviesData} savedMoviesData={savedMoviesData} />
+      </Route>
+      <Route path='/saved-movies'>
+        <SavedMovies moviesData={savedMoviesData} />
       </Route>
     </Switch>
     <Footer />

@@ -27,7 +27,7 @@ function Navigation({ loggedIn }) {
               </Link>
             </li>
             <li>
-              <Link className='navigation__link' to='/'>
+              <Link className='navigation__link' to='/saved-movies'>
                 Сохраненные фильмы
               </Link>
             </li>

@@ -1,12 +1,17 @@
 import './MoviesCard.css'
 
-function MoviesCard({ movieCard, onSave }) {
+function MoviesCard({ isSaved, movieCard, onSave, onDelete }) {
   const savedStyle = movieCard.saved ? 'card__save_active' : '';
   const savedText = movieCard.saved ? '' : 'Cохранить';
 
   const handleSave = () => {
     onSave(movieCard);
   }
+
+  const handleDelete = () => {
+    onDelete(movieCard);
+  }
+
   return (
     <li className='card'>
       <div className='card__heading'>
@@ -14,7 +19,11 @@ function MoviesCard({ movieCard, onSave }) {
         <span className='card__chrono'>{movieCard.duration}</span>
       </div>
       <img className='card__img' src={movieCard.thumbnail} alt={movieCard.nameRU}/>
-      <button className={`card__save ${savedStyle}`} onClick={handleSave}>{savedText}</button>
+      {!isSaved ? (
+        <button className={`card__save ${savedStyle}`} onClick={handleSave}>{savedText}</button>
+      ) : (
+        <button className='card__delete' onClick={handleDelete}></button>
+      )} 
     </li>
   );
 };

@@ -69,7 +69,7 @@
   height: 29px;
   padding: 9px 15px;
   background-color: #313131;
-  background-image: url(../../images/saved.svg);
+  background-image: url(../../images/delete.svg);
   background-repeat: no-repeat;
   background-position: center;
   border: none;
@@ -79,6 +79,10 @@
   line-height: 11px;
   cursor: pointer;
   color: #fff;
+}
+
+.card__delete:hover{
+  opacity: .6;
 }
 
 .card__save:hover {
