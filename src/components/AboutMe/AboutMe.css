@@ -51,4 +51,9 @@
   font-size: 14px;
   line-height: 17px;
   color: #fff;
+  transition: opacity .3s ease;
+}
+
+.about-me__link:hover {
+  opacity: .6;
 }

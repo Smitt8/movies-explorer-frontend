@@ -51,4 +51,9 @@
   background-image: url(../../images/arrow.svg);
   background-repeat: no-repeat;
   background-position: center;
+  transition: opacity .3s ease;
+}
+
+.portfolio__link:hover {
+  opacity: .6;
 }

@@ -9,6 +9,9 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import {moviesData, savedMoviesData} from '../../utils/moviesData';
 import userData from '../../utils/userData';
 import Profile from '../Profile/Profile';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   return (
@@ -32,6 +35,15 @@ function App() {
       <Route path='/profile'>
         <Header loggedIn={true} />
         <Profile user={userData} />
+      </Route>
+      <Route path='/signup'>
+        <Register />
+      </Route>
+      <Route path='/signin'>
+        <Login />
+      </Route>
+      <Route path='*'>
+        <NotFound />
       </Route>
     </Switch>
     </div>

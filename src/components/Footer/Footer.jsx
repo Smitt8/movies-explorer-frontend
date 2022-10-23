@@ -1,4 +1,5 @@
 import Container from '../Container/Container';
+import { Link } from 'react-router-dom'
 import './Footer.css';
 
 function Footer() {
@@ -13,14 +14,14 @@ function Footer() {
           <nav>
             <ul className='footer__nav'>
               <li>
-                <a className='footer__link' href='#'>
+                <Link className='footer__link' to='https://practicum.yandex.ru/'>
                   Яндекс.Практикум
-                </a>
+                </Link>
               </li>
               <li>
-                <a className='footer__link' href='#'>
+                <Link className='footer__link' to='https://github.com/Smitt8'>
                   Github
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

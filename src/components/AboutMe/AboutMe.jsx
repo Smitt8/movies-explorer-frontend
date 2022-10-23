@@ -3,6 +3,8 @@ import photo from '../../images/photo.jpg';
 import Portfolio from '../Portfolio/Portfolio';
 import Title from '../Title/Title';
 import Container from '../Container/Container';
+import { Link } from 'react-router-dom';
+import MainText from '../MainText/MainText';
 
 function AboutMe() {
   return (
@@ -12,23 +14,21 @@ function AboutMe() {
         <div className='about-me__info'>
           <div className='about-me__decription'>
             <h3 className='about-me__name'>Игорь</h3>
-            <p className='about-me__profession'>Фронтенд-разработчик, 30 лет</p>
-            <p className='text'>
-              Я родился и живу в Саратове, закончил факультет экономики СГУ. У
-              меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-              бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
-              Контур». После того, как прошёл курс по веб-разработке, начал
-              заниматься фриланс-заказами и ушёл с постоянной работы.
-            </p>
+            <p className='about-me__profession'>Фронтенд-разработчик, 33 лет</p>
+            <MainText>
+              Я родился и живу в Серпухове, закончил факультет ИТ в МГУПИ. Я
+              долгое время работал программистом на C. Сейчас открываю для себя мир веб-разработки.
+              Для меня это был интересный год полный вызовов и задач, которые мы решали вместе.
+            </MainText>
           </div>
           <img
             className='about-me__photo'
             src={photo}
             alt='Фотография молодого человека'
           />
-          <a className='about-me__link' href='#'>
+          <Link className='about-me__link' to='https://github.com/Smitt8'>
             Github
-          </a>
+          </Link>
         </div>
         <Portfolio />
       </Container>

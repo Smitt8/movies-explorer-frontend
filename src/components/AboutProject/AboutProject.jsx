@@ -1,4 +1,5 @@
 import Container from '../Container/Container';
+import MainText from '../MainText/MainText';
 import Title from '../Title/Title';
 import './AboutProject.css';
 
@@ -12,19 +13,19 @@ function AboutProject() {
             <h3 className='about-project__heading'>
               Дипломный проект включал 5 этапов
             </h3>
-            <p className='text'>
+            <MainText>
               Составление плана, работу над бэкендом, вёрстку, добавление
               функциональности и финальные доработки.
-            </p>
+            </MainText>
           </li>
           <li className='about-project__column'>
             <h3 className='about-project__heading'>
               На выполнение диплома ушло 5 недель
             </h3>
-            <p className='text'>
+            <MainText>
               У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
               соблюдать, чтобы успешно защититься.
-            </p>
+            </MainText>
           </li>
         </ul>
         <ul className='about-project__progress'>

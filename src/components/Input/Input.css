@@ -1,0 +1,28 @@
+.input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.input__heading {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8b8b8b;
+}
+
+.input__field {
+  padding: 15px;
+  box-sizing: border-box;
+  background: #2f2f2f;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.input__field:focus {
+  outline: 2px solid rgb(43, 224, 128, .6);
+  transition: background-color .3s, outline .3s linear;
+}

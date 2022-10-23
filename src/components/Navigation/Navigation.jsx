@@ -8,15 +8,15 @@ function Navigation({ loggedIn }) {
       <Switch>
         <Route exact path='/'>
           <ul className='navigation__list navigation__list_type_auth'>
-            <a className='navigation__link' href='#'>
+            <Link className='navigation__link' to='/signup'>
               Регистрация
-            </a>
-            <a
+            </Link>
+            <Link
               className='navigation__link navigation__link_type_signin'
-              href='#'
+              to='/signin'
             >
               Войти
-            </a>
+            </Link>
           </ul>
         </Route>
         <Route>
