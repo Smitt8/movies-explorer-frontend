@@ -32,7 +32,7 @@ function Navigation({ loggedIn }) {
               </Link>
             </li>
           </ul>
-            <Link className='navigation__account' to='/'>
+            <Link className='navigation__account' to='/profile'>
               Аккаунт
               <button className='navigation__button'></button>
             </Link>

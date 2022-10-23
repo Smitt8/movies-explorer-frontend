@@ -7,23 +7,33 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 
 import {moviesData, savedMoviesData} from '../../utils/moviesData';
+import userData from '../../utils/userData';
+import Profile from '../Profile/Profile';
 
 function App() {
   return (
     <div className='app'>
-    <Header loggedIn={true} />
     <Switch>
       <Route exact path='/'>
+        <Header loggedIn={false} />
         <Main />
+        <Footer />
       </Route>
       <Route path='/movies'>
+        <Header loggedIn={true} />
         <Movies moviesData={moviesData} savedMoviesData={savedMoviesData} />
+        <Footer />
       </Route>
       <Route path='/saved-movies'>
+        <Header loggedIn={true} />
         <SavedMovies moviesData={savedMoviesData} />
+        <Footer />
+      </Route>
+      <Route path='/profile'>
+        <Header loggedIn={true} />
+        <Profile user={userData} />
       </Route>
     </Switch>
-    <Footer />
     </div>
   );
 }
