@@ -1,5 +1,5 @@
 .profile {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 72px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,4 +120,31 @@
   cursor: default;
   color: #8b8b8b;
   transition: none;
+}
+
+@media screen and (max-width: 800px) {
+  .profile__user {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .profile {
+    padding: 70px 0 40px;
+  }
+  .profile__user {
+    max-width: 260px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
+    align-items: flex-start;
+    justify-items: center;
+  }
+  .profile__button {
+  font-size: 12px;
+  line-height: 15px;
+  }
+  .profile__buttons {
+    align-self: flex-end;
+  }
 }

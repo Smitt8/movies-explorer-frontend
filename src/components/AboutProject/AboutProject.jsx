@@ -6,14 +6,14 @@ import './AboutProject.css';
 function AboutProject() {
   return (
     <section className='about-project'>
-      <Container>
+      <Container className='about-project__container'>
         <Title>О проекте</Title>
         <ul className='about-project__description'>
           <li className='about-project__column'>
             <h3 className='about-project__heading'>
               Дипломный проект включал 5 этапов
             </h3>
-            <MainText>
+            <MainText className='about-project__text'>
               Составление плана, работу над бэкендом, вёрстку, добавление
               функциональности и финальные доработки.
             </MainText>
@@ -22,7 +22,7 @@ function AboutProject() {
             <h3 className='about-project__heading'>
               На выполнение диплома ушло 5 недель
             </h3>
-            <MainText>
+            <MainText className='about-project__text'>
               У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было
               соблюдать, чтобы успешно защититься.
             </MainText>

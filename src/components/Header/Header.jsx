@@ -9,7 +9,7 @@ function Header({ loggedIn }) {
   return (
     <header className={`header ${style}`}>
       <Container className='header__container'>
-        <Link to='/'>
+        <Link className='header__link' to='/'>
           <img className='header__logo' src={logo} alt='Лого сайта' />
         </Link>
         <Navigation loggedIn={loggedIn} />

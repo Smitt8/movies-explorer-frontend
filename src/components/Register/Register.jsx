@@ -13,13 +13,11 @@ function Register() {
           name='name'
           type='text'
           heading='Имя'
-          errText='Что-то пошло не так...'
         />
         <Input
           name='email'
           type='email'
           heading='E-mail'
-          errText='Что-то пошло не так...'
         />
         <Input
           name='password'

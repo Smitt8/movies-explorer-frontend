@@ -48,3 +48,10 @@
   line-height: 1.5;
   color: #fff;
 }
+
+@media screen and (max-width: 520px) {
+  .filter__text {
+    font-size: 11px;
+    line-height: 1.64;
+  }
+}

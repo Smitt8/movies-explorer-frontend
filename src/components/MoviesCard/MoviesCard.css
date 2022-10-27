@@ -1,5 +1,5 @@
 .card {
-  max-width: 360px;
+  max-width: 357px;
   max-height: 319px;
   width: 100%;
   height: 100%;
@@ -19,6 +19,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  column-gap: 15px;
   align-items: center;
   padding: 0 18px;
   box-sizing: border-box;
@@ -38,14 +39,17 @@
 }
 
 .card__chrono {
+  max-width: 75px;
+  width: 100%;
   font-weight: 400;
   font-size: 13px;
   line-height: 1.38;
   color: #8b8b8b;
+  text-align: end;
 }
 
 .card__img {
-  width: 360px;
+  width: 100%;
   height: 200px;
   object-fit: cover;
 }
@@ -66,7 +70,7 @@
 
 .card__delete {
   width: 100px;
-  height: 29px;
+  min-height: 29px;
   padding: 9px 15px;
   background-color: #313131;
   background-image: url(../../images/delete.svg);
@@ -90,8 +94,42 @@
 }
 
 .card__save_active {
+  min-height: 29px;
   background-color: #ee3465;
   background-image: url(../../images/saved.svg);
   background-repeat: no-repeat;
   background-position: center;
+}
+
+@media screen and (max-width: 900px) {
+  .card {
+    max-width: 342px;
+    max-height: 309px;
+  }
+  .card__img {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .card {
+    max-width: 300px;
+    max-height: 271px;
+    padding: 14px 0;
+    row-gap: 14px;
+  }
+  .card__heading {
+    padding: 0 14px;
+  }
+  .card__title {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .card__chrono {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .card__img {
+    height: 168px;
+  }
 }

@@ -33,11 +33,12 @@ function MoviesCardList({ isSaved, moviesData }) {
           );
         })}
       </ul>
-      {movies.length > 12 && (
-        <div className='movies-list__more'>
+
+      <div className='movies-list__more'>
+        {movies.length > 3 && (
           <button className='movies-list__button'>Еще</button>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

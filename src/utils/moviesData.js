@@ -26,9 +26,10 @@ const moviesData = [
   {
     _id: 5,
     nameRU: 'Убить Билла: Кровавое дело целиком',
-    duration: '247 минуты',
+    duration: '247 минут',
     thumbnail: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/615d7139-d0a3-473f-9e02-3e6b05d6c1ce/600x900',
-  }
+  },
+  
 ]
 
 const savedMoviesData = [

@@ -9,12 +9,12 @@ import MainText from '../MainText/MainText';
 function AboutMe() {
   return (
     <section className='about-me'>
-      <Container>
+      <Container className='about-me__container'>
         <Title>Студент</Title>
         <div className='about-me__info'>
           <div className='about-me__decription'>
             <h3 className='about-me__name'>Игорь</h3>
-            <p className='about-me__profession'>Фронтенд-разработчик, 33 лет</p>
+            <p className='about-me__profession'>Фронтенд-разработчик, 33 года</p>
             <MainText>
               Я родился и живу в Серпухове, закончил факультет ИТ в МГУПИ. Я
               долгое время работал программистом на C. Сейчас открываю для себя мир веб-разработки.

@@ -5,4 +5,20 @@
   line-height: 20px;
   font-weight: 400;
   color: #fff;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 800px) {
+  .text {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .text {
+    font-size: 11px;
+    line-height: 16px;
+  }
 }

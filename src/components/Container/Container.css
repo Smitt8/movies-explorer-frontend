@@ -6,3 +6,15 @@
   padding: 0 70px;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 800px) {
+  .container {
+    padding: 0 50px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    padding: 0 17px;
+  }
+}

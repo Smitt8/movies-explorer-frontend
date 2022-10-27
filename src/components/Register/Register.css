@@ -7,3 +7,10 @@
   padding: 70px 0;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 520px) {
+  .register {
+    padding: 56px 0 30px;
+    box-sizing: border-box;
+  }
+}

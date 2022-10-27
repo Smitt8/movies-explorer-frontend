@@ -1,5 +1,5 @@
 .techs {
-  padding: 100px 0;
+  padding: 110px 0 100px;
   box-sizing: border-box;
   background-color: #272727;
 }
@@ -20,7 +20,7 @@
   font-size: 50px;
   line-height: 1.16;
   color: #fff;
-  opacity: .1;
+  letter-spacing: -0.04em;
 }
 
 .techs__text {
@@ -33,7 +33,7 @@
   padding: 0;
   display: flex;
   list-style: none;
-  column-gap: 10px;
+  gap: 10px;
   margin-top: 74px;
   justify-content: center;
   align-items: center;
@@ -49,4 +49,51 @@
   line-height: 60px;
   color: #fff;
   text-align: center;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 800px) {
+  .techs {
+    padding: 100px 0 90px;
+  }
+  .techs__info {
+    margin-top: 79px;
+    row-gap: 22px;
+  }
+  .techs__text {
+    letter-spacing: -.04em;
+  }
+  .techs__list {
+    margin-top: 61px;
+    flex-wrap: wrap;
+  }
+  .techs__tech {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 57px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .techs {
+    padding: 71px 0;
+  }
+  .techs__info {
+    margin-top: 60px;
+    row-gap: 24px;
+  }
+  .techs__title {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .techs__list {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .techs__tech {
+    font-size: 12px;
+    line-height: 57px;
+  }
 }

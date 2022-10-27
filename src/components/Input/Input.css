@@ -20,9 +20,19 @@
   border: none;
   border-radius: 8px;
   color: #fff;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .input__field:focus {
   outline: 2px solid rgb(43, 224, 128, .6);
   transition: background-color .3s, outline .3s linear;
+}
+
+.input__field_error {
+  color: #EE3465;
+}
+
+.input__field_error:focus {
+  outline: 2px solid rgb(255, 0, 0, .6);
 }

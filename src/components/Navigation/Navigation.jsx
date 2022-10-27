@@ -1,43 +1,15 @@
-import { Switch, Route, Link } from 'react-router-dom';
+import Menu from '../Menu/Menu';
+import MenuAuth from '../MenuAuth/MenuAuth';
 import './Navigation.css';
 
 function Navigation({ loggedIn }) {
-  const style = !loggedIn ? `navigation_pos_promo` : '';
   return (
-    <nav className={`navigation ${style}`}>
-      <Switch>
-        <Route exact path='/'>
-          <ul className='navigation__list navigation__list_type_auth'>
-            <Link className='navigation__link' to='/signup'>
-              Регистрация
-            </Link>
-            <Link
-              className='navigation__link navigation__link_type_signin'
-              to='/signin'
-            >
-              Войти
-            </Link>
-          </ul>
-        </Route>
-        <Route>
-          <ul className='navigation__list navigation___list_type_movies'>
-            <li>
-              <Link className='navigation__link' to='/movies'>
-                Фильмы
-              </Link>
-            </li>
-            <li>
-              <Link className='navigation__link' to='/saved-movies'>
-                Сохраненные фильмы
-              </Link>
-            </li>
-          </ul>
-            <Link className='navigation__account' to='/profile'>
-              Аккаунт
-              <button className='navigation__button'></button>
-            </Link>
-        </Route>
-      </Switch>
+    <nav className='navigation'>
+      {
+        loggedIn ?
+        <Menu /> :
+        <MenuAuth /> 
+      }
     </nav>
   );
 }
