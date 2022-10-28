@@ -20,9 +20,9 @@ function MoviesCard({ isSaved, movieCard, onSave, onDelete }) {
       </div>
       <img className='card__img' src={movieCard.thumbnail} alt={movieCard.nameRU}/>
       {!isSaved ? (
-        <button className={`card__save ${savedStyle}`} onClick={handleSave}>{savedText}</button>
+        <button type='button' className={`card__save ${savedStyle}`} onClick={handleSave}>{savedText}</button>
       ) : (
-        <button className='card__delete' onClick={handleDelete}></button>
+        <button type='button' className='card__delete' onClick={handleDelete}></button>
       )} 
     </li>
   );

@@ -9,9 +9,9 @@ function Menu() {
 
   return (
     <>
-      <button className='menu__burger' onClick={toggleBurger}></button>
+      <button type='button' className='menu__burger' onClick={toggleBurger}></button>
       <div className={`menu ${style}`}>
-        <button className='menu__close' onClick={toggleBurger}></button>
+        <button type='button' className='menu__close' onClick={toggleBurger}></button>
         <div className='menu__container'>
           <ul className='menu__list'>
             <li>
@@ -32,7 +32,7 @@ function Menu() {
           </ul>
           <Link className='menu__account' to='/profile'>
             Аккаунт
-            <button className='menu__button'></button>
+            <button type='button' className='menu__button'></button>
           </Link>
         </div>
       </div>

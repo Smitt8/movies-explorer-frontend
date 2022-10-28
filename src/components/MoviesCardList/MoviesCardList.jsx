@@ -36,7 +36,7 @@ function MoviesCardList({ isSaved, moviesData }) {
 
       <div className='movies-list__more'>
         {movies.length > 3 && (
-          <button className='movies-list__button'>Еще</button>
+          <button type='button' className='movies-list__button'>Еще</button>
         )}
       </div>
     </section>

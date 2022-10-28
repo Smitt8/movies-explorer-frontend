@@ -28,7 +28,7 @@ function Profile({ user }) {
           <button type='submit' className='profile__button'>
             Редактировать
           </button>
-          <button
+          <button type='button'
             className='profile__button profile__button_type_signout'
             onClick={handleSignout}
           >
