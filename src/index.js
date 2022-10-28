@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+document.documentElement.setAttribute('lang','ru')
 root.render(
   <BrowserRouter>
     <React.StrictMode>

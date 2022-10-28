@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
+import React from 'react';
 
 function App() {
   return (
