@@ -89,7 +89,6 @@
     row-gap: 21px;
   }
   .about-project__progress {
-    grid-template-columns: 140px 528px;
     margin-top: 93px;
   }
 }

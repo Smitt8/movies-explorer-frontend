@@ -12,7 +12,7 @@ function SearchForm() {
             placeholder='Фильм'
             required
           />
-          <button type='button' className='search-form__button'>
+          <button type='submit' className='search-form__button'>
             Найти
           </button>
         </label>
