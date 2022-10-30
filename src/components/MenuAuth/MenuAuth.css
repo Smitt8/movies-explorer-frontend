@@ -1,0 +1,41 @@
+.menu-auth {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  column-gap: 30px;
+}
+
+.menu-auth__link {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+  transition: opacity .3s ease;
+}
+
+.menu-auth_link:hover {
+  opacity: .6;
+}
+
+.menu-auth__link_type_signin {
+  background-color: #3DDC84;
+  border-radius: 3px;
+  padding: 8px 20px;
+  color: #000;
+}
+
+@media screen and (max-width: 520px) {
+  .menu-auth {
+    column-gap: 13px;
+  }
+  .menu-auth__link {
+    font-size: 10px;
+  }
+  .menu-auth__link_type_signin {
+    padding: 5px 13px;
+  }
+}

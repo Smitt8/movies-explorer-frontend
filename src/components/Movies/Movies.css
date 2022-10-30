@@ -1,0 +1,8 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+}
+
+.movies_state_empty {
+  height: calc(100vh - 78px - 172px);
+}
