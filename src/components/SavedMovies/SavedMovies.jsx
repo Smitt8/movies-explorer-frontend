@@ -7,7 +7,7 @@ function SavedMovies({ moviesData }) {
   const movieStyle = moviesData.length === 0 ? 'saved-movies_state_empty' : '';
   return (
     <main className={`saved-movies ${movieStyle}`}>
-      <SearchForm />
+      <SearchForm isSaved={true} />
       {moviesData.length > 0 ? (
         <MoviesCardList isSaved={true} moviesData={moviesData} />
       ) : (
