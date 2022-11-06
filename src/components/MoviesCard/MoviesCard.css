@@ -54,6 +54,10 @@
   object-fit: cover;
 }
 
+.card__link {
+  cursor: pointer;
+}
+
 .card__save {
   width: 100px;
   height: 29px;

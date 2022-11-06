@@ -4,60 +4,77 @@ import { URLS } from "./consts";
 class MainApi extends Api {
   constructor(url, headers) {
     super(url, headers);
+    this._url = `${this._url}/api`
   }
+
   signup({ email, password, name }) {
-    return fetch(`${super._url}/signup`, {
+    return fetch(`${this._url}/signup`, {
       method: 'POST',
-      headers: super._headers,
+      headers: this._headers,
       body: JSON.stringify({
         email,
         password,
         name,
       }),
-    }).then((res) => super._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   };
   signin({ email, password }) {
-    return fetch(`${super._url}/signin`, {
+    return fetch(`${this._url}/signin`, {
       credentials: 'include',
       method: 'POST',
-      headers: super._headers,
+      headers: this._headers,
       body: JSON.stringify({
         email,
         password,
       })
-    }).then((res) => super._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   }
   signout() {
-    return fetch(`${super._url}/signout`, {
+    return fetch(`${this._url}/signout`, {
       credentials: 'include',
       method: 'DELETE',
-      headers: super._headers,
+      headers: this._headers,
     })
   };
   getMe(){
-    return fetch(`${super._url}/users/me`, {
+    return fetch(`${this._url}/users/me`, {
       credentials: 'include',
       method: 'GET',
-      headers: super._headers,
-    }).then((res) => super._checkResponse(res));
+      headers: this._headers,
+    }).then((res) => this._checkResponse(res));
   };
   updMe({ email, name }) {
-    return fetch(`${super._url}/users/me`, {
+    return fetch(`${this._url}/users/me`, {
       credentials: 'include',
       method: 'PATCH',
-      headers: super._headers,
+      headers: this._headers,
       body: JSON.stringify({
         email,
         name,
       }),
-    }).then((res) => super._checkResponse(res));
+    }).then((res) => this._checkResponse(res));
   };
   getSavedMovies() {
-    return fetch(`${super._url}/movies`, {
+    return fetch(`${this._url}/movies`, {
       credentials: 'include',
       method: 'GET',
-      headers: super._headers,
-    }).then((res) => super._checkResponse(res));
+      headers: this._headers,
+    }).then((res) => this._checkResponse(res));
+  };
+  saveMovie(movie) {
+    return fetch(`${this._url}/movies`, {
+      credentials: 'include',
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(movie),
+    }).then((res) => this._checkResponse(res));
+  };
+  deleteMovie(_id) {
+    return fetch(`${this._url}/movies/${_id}`, {
+      credentials: 'include',
+      method: 'DELETE',
+      headers: this._headers,
+    }).then((res) => this._checkResponse(res));
   }
 }
 

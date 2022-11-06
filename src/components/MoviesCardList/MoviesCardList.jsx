@@ -3,24 +3,18 @@ import './MoviesCardList.css';
 import React from 'react';
 import useMore from '../../utils/useMore';
 
-function MoviesCardList({ isSaved, moviesData }) {
+function MoviesCardList({ isSaved, moviesData, onSave, onDelete }) {
   const [movies, setMovies] = React.useState([]);
   const [cardsMax, setCardMax] = React.useState(0);
   const { limit, incriment } = useMore();
 
   React.useEffect(() => {
-    setMovies(moviesData.slice(0, limit));
-    setCardMax(moviesData.length)
-  }, [moviesData, limit]);
-
-  const handleMovieSave = (movie) => {
-    movie.saved = !movie.saved;
-    setMovies((movies) => movies.map((m) => (m.id === movie.id ? movie : m)));
-  };
-
-  const handleMovieDelete = (movie) => {
-    setMovies((movies) => movies.filter((m) => m._id !== movie._id));
-  };
+    if (!isSaved) setMovies(moviesData.slice(0, limit));
+    else {
+      setMovies(moviesData);
+    }
+    setCardMax(moviesData.length);
+  }, [moviesData, limit, isSaved]);
 
   return (
     <section className='movies-list'>
@@ -28,19 +22,25 @@ function MoviesCardList({ isSaved, moviesData }) {
         {movies.map((movie) => {
           return (
             <MoviesCard
-              key={movie._id}
+              key={movie._id || movie.movieId}
               isSaved={isSaved}
               movieCard={movie}
-              onSave={handleMovieSave}
-              onDelete={handleMovieDelete}
+              onSave={onSave}
+              onDelete={onDelete}
             />
           );
         })}
       </ul>
 
       <div className='movies-list__more'>
-        {cardsMax > limit && (
-          <button type='button' className='movies-list__button' onClick={incriment}>Еще</button>
+        {(!isSaved && cardsMax > limit) && (
+          <button
+            type='button'
+            className='movies-list__button'
+            onClick={incriment}
+          >
+            Еще
+          </button>
         )}
       </div>
     </section>

@@ -18,7 +18,9 @@ function MoviesCard({ isSaved, movieCard, onSave, onDelete }) {
         <h3 className='card__title'>{movieCard.nameRU}</h3>
         <span className='card__chrono'>{`${movieCard.duration} минут`}</span>
       </div>
-      <img className='card__img' src={`https://api.nomoreparties.co/${movieCard.image.url}`} alt={movieCard.nameRU}/>
+      <a className='card__link' href={movieCard.trailerLink} target='_blank' rel="noreferrer">
+        <img className='card__img' src={movieCard.image} alt={movieCard.nameRU}/>
+        </a>
       {!isSaved ? (
         <button type='button' className={`card__save ${savedStyle}`} onClick={handleSave}>{savedText}</button>
       ) : (

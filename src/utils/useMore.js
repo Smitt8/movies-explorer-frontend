@@ -1,7 +1,7 @@
 import React from "react";
 import useResize from "./useResize";
 
-export default function useMore() {
+export default function useMore(isSaved) {
   const [limit, setLimit] = React.useState(12);
   const [inc, setInc] = React.useState(3);
   const { width } = useResize();
