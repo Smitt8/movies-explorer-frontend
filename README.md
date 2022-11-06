@@ -14,3 +14,4 @@
 
 Макет диплома --> [жмак](https://disk.yandex.ru/d/Qwn0yrE63U7qxA)
 Ссылка на ресурс --> [жмак](https://diploma.prokazov.nomorepartiesxyz.ru)
+Ссылка на pull request --> [жмак](https://github.com/Smitt8/movies-explorer-frontend/pull/2)
