@@ -1,7 +1,7 @@
 const URLS = {
   movies: "https://api.nomoreparties.co/beatfilm-movies",
- // main: "https://api.diploma.prokazov.nomorepartiesxyz.ru",
-  main: "http://localhost:3001"
+  main: "https://api.diploma.prokazov.nomorepartiesxyz.ru",
+  // main: "http://localhost:3001"
 }
 
 const REGEX_NAME = /[A-Za-zА-Яа-я-\s]+$/;
