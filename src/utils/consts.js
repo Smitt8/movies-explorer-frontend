@@ -4,8 +4,10 @@ const URLS = {
 }
 
 const REGEX_NAME = /[A-Za-zА-Яа-я-\s]+$/;
+const FETCH_ERR = /'fetch'/;
 
 export {
   URLS,
   REGEX_NAME,
+  FETCH_ERR
 }

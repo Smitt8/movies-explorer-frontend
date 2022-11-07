@@ -65,7 +65,6 @@ function Profile({ loggedIn, onSubmit, onLogout }) {
               type='button'
               className='profile__button profile__button_type_signout'
               onClick={onLogout}
-              disabled={!isSubmitEnabled}
             >
               Выйти из аккаунта
             </button>

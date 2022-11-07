@@ -1,4 +1,5 @@
 import React from 'react';
+import { FETCH_ERR } from '../../utils/consts';
 import './Error.css'
 
 function Error({ className, text }) {
@@ -8,7 +9,7 @@ function Error({ className, text }) {
 
   React.useEffect(() => {
     if (text) {
-      setModText((text.test('fetch')) ? 'Ошибка соединения с сервером' : text);
+      setModText((FETCH_ERR.test(text)) ? 'Ошибка соединения с сервером' : text);
     }
   }, [text, modText])
   return (
