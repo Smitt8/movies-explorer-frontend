@@ -3,7 +3,6 @@ import photo from '../../images/photo.jpg';
 import Portfolio from '../Portfolio/Portfolio';
 import Title from '../Title/Title';
 import Container from '../Container/Container';
-import { Link } from 'react-router-dom';
 import MainText from '../MainText/MainText';
 
 function AboutMe() {

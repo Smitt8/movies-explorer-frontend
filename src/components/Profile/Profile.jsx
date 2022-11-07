@@ -58,7 +58,8 @@ function Profile({ loggedIn, onSubmit, onLogout }) {
             </label>
           </div>
           <div className='profile__buttons'>
-            <button type='submit' className={`profile__button ${isSubmitEnabled ? '' : 'profile__button_disabled'}`}>
+            <button type='submit' className={`profile__button ${isSubmitEnabled ? '' : 'profile__button_disabled'}`}
+            disabled={!isSubmitEnabled}>
               Редактировать
             </button>
             <button
