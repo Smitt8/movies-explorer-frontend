@@ -5,6 +5,7 @@ import './Movies.css';
 import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { CurrentUserContext } from '../Context/CurrentUserContext';
 
 function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoading }) {
   const [movieStyle, setMovieStyle] = React.useState('movies_state_empty');
@@ -13,6 +14,7 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
   const [isInit, setIsInit] = React.useState(true);
   const [isShortcuts, setIsShortcuts] = React.useState(false);
   const [cardsLimit, setCardLimit] = React.useState(12);
+  const user = React.useContext(CurrentUserContext);
 
   const handleSubmit = (searchQuery) => {
     setIsInit(searchQuery ? false : true);
@@ -88,7 +90,7 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
           movieId: m.id,
           nameRU: m.nameRU,
           nameEN: m.nameEN,
-          saved: savedMoviesData.some((s) => s.movieId === m.id),
+          saved: savedMoviesData.some((s) => (s.movieId === m.id && s.owner === user._id)),
         };
       })
     );

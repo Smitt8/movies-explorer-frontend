@@ -1,4 +1,5 @@
 import React from 'react';
+import { CurrentUserContext } from '../Context/CurrentUserContext';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -7,6 +8,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 
 function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete }) {
+  const user = React.useContext(CurrentUserContext);
   const [movieStyle, setMovieStyle] = React.useState('movies_state_empty');
   const [foundMovies, setFoundMovies] = React.useState([]);
   const [isShortcuts, setIsShortcuts] = React.useState(false);
@@ -32,9 +34,10 @@ function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete }) {
   };
 
   React.useEffect(() => {
-    setFoundMovies(moviesData);
-    sessionStorage.setItem('foundMovies-saved', JSON.stringify(moviesData));
-  }, [moviesData]);
+    const movies = moviesData.filter((m) => m.owner === user._id);
+    setFoundMovies(movies);
+    sessionStorage.setItem('foundMovies-saved', JSON.stringify(movies));
+  }, [moviesData, user._id]);
 
   React.useEffect(() => {
     setMovieStyle(foundMovies.length > 0 ? '' : 'movies_state_empty');
@@ -62,7 +65,7 @@ function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete }) {
     const cachedShortcuts = sessionStorage.getItem('shortcuts-movies-saved');
     if (cachedFoundMovies) {
       setFoundMovies(cachedFoundMovies);
-    }
+    } 
     if (cachedShortcuts) {
       setIsShortcuts(true);
     }

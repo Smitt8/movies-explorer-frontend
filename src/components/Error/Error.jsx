@@ -9,7 +9,7 @@ function Error({ className, text }) {
 
   React.useEffect(() => {
     if (text) {
-      setModText((FETCH_ERR.test(text)) ? 'Ошибка соединения с сервером' : text);
+      setModText((text.match("fetch")) ? 'Ошибка соединения с сервером' : text);
     }
   }, [text, modText])
   return (

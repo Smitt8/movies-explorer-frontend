@@ -57,9 +57,9 @@ function App() {
     const authorized = localStorage.getItem('auth');
     if (authorized) {
       MainApi.getMe().then((res) => {
-        const { name, email } = res;
+        const { name, email, _id } = res;
         setLoggedIn(true);
-        setUser({ name, email });
+        setUser({ name, email, _id });
       }).catch((err) => {
         setLoggedIn(false);
         localStorage.removeItem('auth');
@@ -81,8 +81,8 @@ function App() {
   const handleSignin = ({ email, password }) => {
     MainApi.signin({ email, password })
       .then((res) => {
-        const { email, name } = res;
-        setUser({ email, name });
+        const { email, name, _id } = res;
+        setUser({ email, name, _id });
         setLoggedIn(true);
         localStorage.setItem('auth', true);
         history.push('/movies');
