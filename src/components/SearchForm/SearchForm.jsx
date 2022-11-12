@@ -41,9 +41,10 @@ function SearchForm({ isSaved, isShortcuts, onSubmit, onChecked, isLoading }) {
           <input
             className='search-form__search'
             type='text'
+            name='query'
             placeholder='Фильм'
             onChange={handleInput}
-            value={searchQuery}
+            value={searchQuery || ''}
             disabled={isLoading}
           />
           <button type='submit' className='search-form__button' disabled={isLoading}>

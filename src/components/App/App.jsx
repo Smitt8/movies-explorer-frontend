@@ -17,6 +17,7 @@ import MainApi from '../../utils/MainApi';
 import { CurrentUserContext } from '../Context/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import { getErrMsg } from '../../utils/errMessages';
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -45,7 +46,7 @@ function App() {
           setToolMessage(message);
           console.log(message);
           if (message === 'Пожалуйста авторизуйтесь.') {
-            handleSignout()
+            handleSignout();
           }
           return Promise.reject(err);
         })
@@ -61,8 +62,7 @@ function App() {
         setLoggedIn(true);
         setUser({ name, email });
       }).catch((err) => {
-        setLoggedIn(false);
-        localStorage.removeItem('auth');
+          handleSignout();
       });
     }
   }, [history]);
@@ -70,11 +70,10 @@ function App() {
   const handleSignup = ({ name, email, password }) => {
     MainApi.signup({ email, name, password })
       .then((res) => {
-        console.log(res);
         handleSignin({ email, password });
       })
       .catch((err) => {
-        setApiError(err.message);
+        setApiError(getErrMsg(err));
       });
   };
 
@@ -88,7 +87,7 @@ function App() {
         history.push('/movies');
       })
       .catch((err) => {
-        setApiError(err.message.match('fetch') ? 'Сервер недоступен' : err.message);
+        setApiError(getErrMsg(err));
       });
   };
 
@@ -103,6 +102,9 @@ function App() {
         localStorage.clear();
         localStorage.removeItem('auth');
         history.push('/');
+        setMoviesData([]);
+        setSavedMoviesData([]);
+        setUser({});
       })
       .catch((err) => {
         console.log(err);
@@ -122,7 +124,7 @@ function App() {
       .catch((err) => {
         setIsToolOpen(true);
         setIsOk(false);
-        setToolMessage(err.message);
+        setToolMessage(getErrMsg(err));
         return Promise.reject(err);
       });
   };
@@ -141,7 +143,7 @@ function App() {
         setIsOk(false);
         setToolMessage(message);
         if (message === 'Пожалуйста авторизуйтесь.') {
-          handleSignout()
+          handleSignout();
         }
         return Promise.reject(err);
       })
@@ -164,7 +166,7 @@ function App() {
         setIsOk(false);
         setToolMessage(err.message);
         if (message === 'Пожалуйста авторизуйтесь.') {
-          handleSignout()
+          handleSignout();
         }
         return Promise.reject(err);
       })

@@ -42,7 +42,7 @@ function Profile({ loggedIn, onSubmit, onLogout }) {
                 value={values['name'] || ''}
                 required
               />
-              <Error className='profile__error' text={errors['name']} />
+              <Error className='profile__error' text={errors['name'] || ''} />
             </label>
             <label className='profile__label'>
               <span className='profile__text'>E-mail</span>
@@ -51,7 +51,7 @@ function Profile({ loggedIn, onSubmit, onLogout }) {
                 name='email'
                 className='profile__input'
                 onChange={handleChange}
-                value={values['email']}
+                value={values['email'] || ''}
                 required
               />
               <Error className='profile__error' text={errors['email'] || ''} />

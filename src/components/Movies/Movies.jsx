@@ -5,7 +5,6 @@ import './Movies.css';
 import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { CurrentUserContext } from '../Context/CurrentUserContext';
 import { filterByShortcut, filterByText } from '../../utils/filters';
 
 function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoading }) {

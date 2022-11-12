@@ -32,7 +32,6 @@ function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete, isL
   React.useEffect(() => {
       setDisplayedMovies(isShortcuts ? filterByShortcut(foundMovies) : foundMovies);
   }, [isShortcuts, foundMovies]);
-  console.log(displayedMovies);
 
   return (
     <>
