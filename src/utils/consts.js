@@ -15,9 +15,9 @@ const WIDTH_COMP = 1280;
 const WIDTH_PAD = 768;
 const WIDTH_PHONE = 320;
 
-const INC_COMP = 1280;
-const INC_PAD = 768;
-const INC_PHONE = 320;
+const INC_COMP = 3;
+const INC_PAD = 2;
+const INC_PHONE = 2;
 
 
 export {
