@@ -2,7 +2,7 @@ import logo from '../../images/logo.svg';
 import { Link, Switch, Route } from 'react-router-dom';
 import './AuthContainer.css';
 
-function AuthContainer({ children, title, isValid, onSubmit, submitText, apiError }) {
+function AuthContainer({ children, title, isValid, onSubmit, submitText, apiError, disabled}) {
   const validStyle = isValid ? '' : 'auth__submit_disabled';
   return (
     <section className='auth'>
@@ -17,7 +17,7 @@ function AuthContainer({ children, title, isValid, onSubmit, submitText, apiErro
           <button
             type='submit'
             className={`auth__submit ${validStyle}`}
-            disabled={!isValid}
+            disabled={!isValid && disabled}
           >
             {submitText}
           </button>

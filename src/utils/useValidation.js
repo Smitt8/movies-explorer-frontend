@@ -20,8 +20,22 @@ export default function useValidation(user) {
 
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: createMessage(target) });
-    setIsValid(target.closest('form').checkValidity());
+    setIsValid(getValidity(target));
   };
+
+  const getValidity = (target) => {
+    const { name, value } = target;
+    const email = (name === 'email') ? value : values['email'];
+    const validity = target.closest('form').checkValidity();
+    if (!validity) {
+      return validity;
+    }
+    if (email) {
+      return (isEmail(email) && validity);
+    }
+    
+    return validity;
+  }; 
 
   const createMessage = ({ name, value, validationMessage }) => {
 

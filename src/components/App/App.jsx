@@ -34,10 +34,9 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       setIsLoading(true);
-      Promise.all([MoviesApi.getMovies(), MainApi.getSavedMovies()])
-        .then(([moviesData, savedData]) => {
+      MainApi.getSavedMovies()
+        .then((savedData) => {
           setSavedMoviesData(savedData);
-          setMoviesData(moviesData);
         })
         .catch((err) => {
           const { message } = err;
@@ -57,27 +56,57 @@ function App() {
   React.useEffect(() => {
     const authorized = localStorage.getItem('auth');
     if (authorized) {
+      setIsLoading(true);
       MainApi.getMe().then((res) => {
         const { name, email } = res;
         setLoggedIn(true);
         setUser({ name, email });
       }).catch((err) => {
           handleSignout();
-      });
+      }).finally(() => setIsLoading(false));
     }
   }, [history]);
 
+  React.useEffect(() => {
+    if (loggedIn) {
+      const cachedMovies = JSON.parse(localStorage.getItem('movies'));
+      if (cachedMovies) {
+        setMoviesData(cachedMovies);
+      } else {
+        setIsLoading(true);
+        MoviesApi.getMovies()
+          .then((res) => {
+            setMoviesData(res);
+            localStorage.setItem('movies', JSON.stringify(res));
+          })
+          .catch((err) => {
+            const { message } = err;
+            setIsToolOpen(true);
+            setIsOk(false);
+            setToolMessage(message);
+            console.log(message);
+            if (message === 'Пожалуйста авторизуйтесь.') {
+              handleSignout();
+            }
+          })
+          .finally(() => setIsLoading(false));
+      }
+    }
+  }, [loggedIn]);
+
   const handleSignup = ({ name, email, password }) => {
+    setIsLoading(true);
     MainApi.signup({ email, name, password })
       .then((res) => {
         handleSignin({ email, password });
       })
       .catch((err) => {
         setApiError(getErrMsg(err));
-      });
+      }).finally(() => setIsLoading(false));
   };
 
   const handleSignin = ({ email, password }) => {
+    setIsLoading(true);
     MainApi.signin({ email, password })
       .then((res) => {
         const { email, name } = res;
@@ -88,7 +117,7 @@ function App() {
       })
       .catch((err) => {
         setApiError(getErrMsg(err));
-      });
+      }).finally(() => setIsLoading(false));
   };
 
   const resetApiError = () => {
@@ -96,6 +125,7 @@ function App() {
   };
 
   const handleSignout = () => {
+    setIsLoading(true);
     MainApi.signout()
       .then(() => {
         setLoggedIn(false);
@@ -108,10 +138,11 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      }).finally(() => setIsLoading(false));
   };
 
   const handleUpdProfile = ({ email, name }) => {
+    setIsLoading(true);
     return MainApi.updMe({ email, name })
       .then((res) => {
         const { email, name } = res;
@@ -126,7 +157,7 @@ function App() {
         setIsOk(false);
         setToolMessage(getErrMsg(err));
         return Promise.reject(err);
-      });
+      }).finally(() => setIsLoading(false));
   };
 
   const handleSaveMovie = (movie) => {
@@ -220,6 +251,7 @@ function App() {
               component={Profile}
               onLogout={handleSignout}
               onSubmit={handleUpdProfile}
+              isLoading={isLoading}
             />
           </Route>
           <Route path='/signup'>

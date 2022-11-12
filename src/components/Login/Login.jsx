@@ -4,7 +4,7 @@ import AuthContainer from '../AuthContainer/AuthContainer';
 import Input from '../Input/Input';
 import './Login.css';
 
-function Login({ onLogin, apiError, resetApiError }) {
+function Login({ onLogin, apiError, resetApiError, isLoading }) {
   const { values, handleChange, errors, isValid } = useValidation();
 
   const handleSubmit = (e) => {
@@ -24,6 +24,7 @@ function Login({ onLogin, apiError, resetApiError }) {
         submitText='Войти'
         isValid={isValid}
         apiError={apiError}
+        disabled={isLoading}
       >
         <Input
           name='email'
@@ -32,6 +33,7 @@ function Login({ onLogin, apiError, resetApiError }) {
           value={values['email'] || ''}
           onChange={handleChange}
           errText={errors['email']}
+          disabled={isLoading}
         />
         <Input
           name='password'
@@ -40,6 +42,7 @@ function Login({ onLogin, apiError, resetApiError }) {
           value={values['password'] || ''}
           onChange={handleChange}
           errText={errors['password']}
+          disabled={isLoading}
         />
       </AuthContainer>
     </main>

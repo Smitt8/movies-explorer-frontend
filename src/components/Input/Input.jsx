@@ -1,7 +1,7 @@
 import Error from '../Error/Error';
 import './Input.css';
 
-function Input({ name, type, heading, errText, minLength, maxLength, onChange, value }) {
+function Input({ name, type, heading, errText, minLength, maxLength, onChange, value, disabled }) {
   const style = errText ? 'input__field_error' : '';
   return (
     <label className='input'>
@@ -15,6 +15,7 @@ function Input({ name, type, heading, errText, minLength, maxLength, onChange, v
         onChange={onChange}
         value={value}
         required
+        disabled={disabled || false}
       />
       <Error isActive={errText} text={errText} />
     </label>

@@ -20,6 +20,7 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
     const found = filterByText(movies, searchQuery);
     setFoundMovies(found);
     localStorage.setItem('foundMovies', JSON.stringify(found));
+    localStorage.setItem('query', searchQuery);
   };
 
   const handleChecked = () => {

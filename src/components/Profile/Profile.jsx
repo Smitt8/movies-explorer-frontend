@@ -5,7 +5,7 @@ import Error from '../Error/Error';
 import Header from '../Header/Header';
 import './Profile.css';
 
-function Profile({ loggedIn, onSubmit, onLogout }) {
+function Profile({ loggedIn, onSubmit, onLogout, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, errors, isValid } = useValidation(currentUser);
   const [isSubmitEnabled, setIsSubmitEnabled] = React.useState(false);
@@ -20,7 +20,7 @@ function Profile({ loggedIn, onSubmit, onLogout }) {
   };
 
   React.useEffect(() => {
-    const valid = (isValid && (values.name !== currentUser.name || values.email !== currentUser.email));
+    const valid = (isValid && (values.name !== currentUser.name || values.email !== currentUser.email) && !isLoading);
     setIsSubmitEnabled(valid)
   }, [isValid, currentUser, values])
 

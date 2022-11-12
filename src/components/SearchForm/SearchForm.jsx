@@ -12,7 +12,6 @@ function SearchForm({ isSaved, isShortcuts, onSubmit, onChecked, isLoading }) {
       setSearchErr('Нужно ввести ключевое слово');
     } else {
       onSubmit(searchQuery);
-      (!isSaved) && localStorage.setItem('query', searchQuery);
     }
   };
 
