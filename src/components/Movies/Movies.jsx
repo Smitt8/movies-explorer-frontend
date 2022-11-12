@@ -14,7 +14,6 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
   const [displayedMovies, setDisplayedMovies] = React.useState([]);
   const [isInit, setIsInit] = React.useState(true);
   const [isShortcuts, setIsShortcuts] = React.useState(false);
-  const [cardsLimit, setCardLimit] = React.useState(12);
 
   const handleSubmit = (searchQuery) => {
     setIsInit(searchQuery ? false : true);
@@ -30,10 +29,6 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
     } else {
       localStorage.removeItem('shortcuts-movies');
     }
-  };
-
-  const handleMore = () => {
-    setCardLimit((cardsLimit) => (cardsLimit += 3));
   };
 
   const toggleMovie = (saved, movie) => {
@@ -110,12 +105,11 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
       setFoundMovies(cachedFoundMovies);
       localStorage.setItem('foundMovies', JSON.stringify(cachedFoundMovies));
       setIsInit(cachedFoundMovies.length ? false : true);
-      setDisplayedMovies(cachedFoundMovies);
     }
     if (cachedShortcuts) {
       setIsShortcuts(true);
     }
-  }, []);
+  }, [savedMoviesData]);
 
   return (
     <>
@@ -133,8 +127,6 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
             <MoviesCardList
               isSaved={false}
               moviesData={displayedMovies}
-              cardsLimit={cardsLimit}
-              onMore={handleMore}
               onSave={handleMovieSave}
               onDelete={onDelete}
             />
