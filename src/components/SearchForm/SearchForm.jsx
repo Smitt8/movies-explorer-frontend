@@ -2,13 +2,18 @@ import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({ isSaved, isShortcuts, onSubmit, onChecked }) {
+function SearchForm({ isSaved, isShortcuts, onSubmit, onChecked, isLoading }) {
   const [searchQuery, setSearchQuery] = React.useState("");
-  const key = isSaved ? "saved" : "movies";
+  const [searchErr, setSearchErr] = React.useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    sessionStorage.setItem(`query-${key}`, searchQuery);
-    onSubmit(searchQuery);
+    if (searchQuery === '') {
+      setSearchErr('Нужно ввести ключевое слово');
+    } else {
+      onSubmit(searchQuery);
+      (!isSaved) && localStorage.setItem('query', searchQuery);
+    }
   };
 
   const handleInput = (e) => {
@@ -17,11 +22,17 @@ function SearchForm({ isSaved, isShortcuts, onSubmit, onChecked }) {
   };
 
   React.useEffect(() => {
-    const cached = sessionStorage.getItem(`query-${key}`);
-    if (cached) {
-      setSearchQuery(cached);
+    if (!isSaved) {
+      const cached = localStorage.getItem('query');
+      if (cached) {
+        setSearchQuery(cached);
+      }
     }
-  }, [key]);
+  }, [isSaved]);
+
+  React.useEffect(() => {
+    setSearchErr('');
+  }, [searchQuery]);
 
   return (
     <section className='search-form'>
@@ -33,11 +44,12 @@ function SearchForm({ isSaved, isShortcuts, onSubmit, onChecked }) {
             placeholder='Фильм'
             onChange={handleInput}
             value={searchQuery}
-            required
+            disabled={isLoading}
           />
-          <button type='submit' className='search-form__button'>
+          <button type='submit' className='search-form__button' disabled={isLoading}>
             Найти
           </button>
+          <p className='search-form__error'>{searchErr}</p>
         </label>
         <FilterCheckbox isShortcuts={isShortcuts} onChecked={onChecked} />
       </form>

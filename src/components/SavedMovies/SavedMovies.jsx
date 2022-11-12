@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurrentUserContext } from '../Context/CurrentUserContext';
+import { filterByShortcut, filterByText } from '../../utils/filters';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
@@ -7,69 +7,32 @@ import MoviesEmptyList from '../MoviesEmptyList/MoviesEmptyList';
 import SearchForm from '../SearchForm/SearchForm';
 import './SavedMovies.css';
 
-function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete }) {
-  const user = React.useContext(CurrentUserContext);
+function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete, isLoading }) {
   const [movieStyle, setMovieStyle] = React.useState('movies_state_empty');
   const [foundMovies, setFoundMovies] = React.useState([]);
+  const [displayedMovies, setDisplayedMovies] = React.useState([]);
   const [isShortcuts, setIsShortcuts] = React.useState(false);
 
   const handleSubmit = (searchQuery) => {
-    setFoundMovies(
-      moviesData.filter((m) => {
-        return (
-          m.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          m.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      })
-    );
+    setFoundMovies(filterByText(moviesData, searchQuery));
   };
 
   const handleChecked = () => {
     setIsShortcuts(!isShortcuts);
-    if (!isShortcuts) {
-      sessionStorage.setItem('shortcuts-movies-saved', !isShortcuts);
-    } else {
-      sessionStorage.removeItem('shortcuts-movies-saved');
-    }
   };
 
   React.useEffect(() => {
-    const movies = moviesData.filter((m) => m.owner === user._id);
-    setFoundMovies(movies);
-    sessionStorage.setItem('foundMovies-saved', JSON.stringify(movies));
-  }, [moviesData, user._id]);
+    setFoundMovies(moviesData);
+  }, [moviesData]);
 
   React.useEffect(() => {
-    setMovieStyle(foundMovies.length > 0 ? '' : 'movies_state_empty');
-  }, [foundMovies]);
+    setMovieStyle(displayedMovies.length > 0 ? '' : 'movies_state_empty');
+  }, [displayedMovies]);
 
   React.useEffect(() => {
-    if (isShortcuts) {
-      setFoundMovies((foundMovies) =>
-        foundMovies.filter((m) => {
-          return m.duration < 40;
-        })
-      );
-    } else {
-      const cached = JSON.parse(sessionStorage.getItem('foundMovies-saved'));
-      if (cached) {
-        setFoundMovies(cached);
-      }
-    }
-  }, [isShortcuts]);
-
-  React.useEffect(() => {
-    const cachedFoundMovies = JSON.parse(
-      sessionStorage.getItem('foundMovies-saved')
-    );
-    const cachedShortcuts = sessionStorage.getItem('shortcuts-movies-saved');
-    if (cachedFoundMovies) {
-      setFoundMovies(cachedFoundMovies);
-    } 
-    if (cachedShortcuts) {
-      setIsShortcuts(true);
-    }
-  }, []);
+      setDisplayedMovies(isShortcuts ? filterByShortcut(foundMovies) : foundMovies);
+  }, [isShortcuts, foundMovies]);
+  console.log(displayedMovies);
 
   return (
     <>
@@ -80,9 +43,10 @@ function SavedMovies({ loggedIn, isLoadng, errLoading, moviesData, onDelete }) {
         isShortcuts={isShortcuts}
         onSubmit={handleSubmit}
         onChecked={handleChecked}
-      />
-      {foundMovies.length > 0 ? (
-        <MoviesCardList isSaved={true} moviesData={foundMovies} onDelete={onDelete}/>
+        isLoading={isLoading}
+        />
+      {displayedMovies.length > 0 ? (
+        <MoviesCardList isSaved={true} moviesData={displayedMovies} onDelete={onDelete}/>
       ) : (
         <MoviesEmptyList isLoadng={isLoadng}
           text={`${

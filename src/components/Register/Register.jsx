@@ -32,7 +32,7 @@ function Register({ onRegister, apiError, resetApiError }) {
           heading='Имя'
           minLength={2}
           maxLength={30}
-          value={values['name']}
+          value={values['name'] || ''}
           onChange={handleChange}
           errText={errors['name']}
         />
@@ -40,7 +40,7 @@ function Register({ onRegister, apiError, resetApiError }) {
           name='email'
           type='email'
           heading='E-mail'
-          value={values['email']}
+          value={values['email'] || ''}
           onChange={handleChange}
           errText={errors['email']}
         />
@@ -48,7 +48,7 @@ function Register({ onRegister, apiError, resetApiError }) {
           name='password'
           type='password'
           heading='Пароль'
-          value={values['password']}
+          value={values['password'] || ''}
           onChange={handleChange}
           errText={errors['password']}
         />

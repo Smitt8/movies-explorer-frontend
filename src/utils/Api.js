@@ -9,7 +9,7 @@ export default class Api {
         if (ok) {
             return res;
         }
-        return Promise.reject(new Error(res.message))
+        return Promise.reject(new Error(res.message));
     })
   };
 }

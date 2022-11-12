@@ -1,19 +1,17 @@
 import React from 'react';
-import { FETCH_ERR } from '../../utils/consts';
 import './Error.css'
 
 function Error({ className, text }) {
-  const style = (text) ? 'error_active' : '';
   const cl = (className) || ''; 
-  const [modText, setModText] = React.useState('');
+  const [errText, setErrText] = React.useState('');
+  const [errStyle, setErrStyle] = React.useState('');
 
   React.useEffect(() => {
-    if (text) {
-      setModText((text.match("fetch")) ? 'Ошибка соединения с сервером' : text);
-    }
-  }, [text, modText])
+    setErrText(text);
+    setErrStyle((text) ? 'error_active' : '');
+  }, [text])
   return (
-    <span className={`error ${style} ${cl}`}>{modText}</span>
+    <span className={`error ${errStyle} ${cl}`}>{errText}</span>
   );
 };
 

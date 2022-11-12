@@ -1,20 +1,21 @@
 import React from "react";
+import { CARD_LIMIT_COMP, CARD_LIMIT_PAD, CARD_LIMIT_PHONE, INC_COMP, INC_PAD, INC_PHONE, WIDTH_COMP, WIDTH_PAD, WIDTH_PHONE } from "./consts";
 import useResize from "./useResize";
 
 export default function useMore(isSaved) {
-  const [limit, setLimit] = React.useState(12);
-  const [inc, setInc] = React.useState(3);
+  const [limit, setLimit] = React.useState(CARD_LIMIT_COMP);
+  const [inc, setInc] = React.useState(INC_COMP);
   const { width } = useResize();
   React.useEffect(() => {
-    if (width >= 1280) {
-      setLimit(12);
-      setInc(3);
-    } else if (width >= 768) {
-      setLimit(8);
-      setInc(2);
-    } else if (width >= 320) {
-      setLimit(5);
-      setInc(2);
+    if (width >= WIDTH_COMP) {
+      setLimit(CARD_LIMIT_COMP);
+      setInc(INC_COMP);
+    } else if (width >= WIDTH_PAD) {
+      setLimit(CARD_LIMIT_PAD);
+      setInc(INC_PAD);
+    } else if (width >= WIDTH_PHONE) {
+      setLimit(CARD_LIMIT_PHONE);
+      setInc(INC_PHONE);
     }
   }, [width]);
 

@@ -6,34 +6,30 @@ import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { CurrentUserContext } from '../Context/CurrentUserContext';
+import { filterByShortcut, filterByText } from '../../utils/filters';
 
 function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoading }) {
   const [movieStyle, setMovieStyle] = React.useState('movies_state_empty');
   const [movies, setMovies] = React.useState([]);
   const [foundMovies, setFoundMovies] = React.useState([]);
+  const [displayedMovies, setDisplayedMovies] = React.useState([]);
   const [isInit, setIsInit] = React.useState(true);
   const [isShortcuts, setIsShortcuts] = React.useState(false);
   const [cardsLimit, setCardLimit] = React.useState(12);
-  const user = React.useContext(CurrentUserContext);
 
   const handleSubmit = (searchQuery) => {
     setIsInit(searchQuery ? false : true);
-    setFoundMovies(
-      movies.filter((m) => {
-        return (
-          m.nameRU.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          m.nameEN.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      })
-    );
+    const found = filterByText(movies, searchQuery);
+    setFoundMovies(found);
+    localStorage.setItem('foundMovies', JSON.stringify(found));
   };
 
   const handleChecked = () => {
     setIsShortcuts(!isShortcuts);
     if (!isShortcuts) {
-      sessionStorage.setItem('shortcuts-movies', !isShortcuts);
+      localStorage.setItem('shortcuts-movies', !isShortcuts);
     } else {
-      sessionStorage.removeItem('shortcuts-movies');
+      localStorage.removeItem('shortcuts-movies');
     }
   };
 
@@ -53,7 +49,7 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
     setMovies((movies) =>
       movies.map((m) => (m.movieId === newMovie.movieId ? newMovie : m))
     );
-    sessionStorage.setItem('foundMovies', JSON.stringify(updMovies));
+    localStorage.setItem('foundMovies', JSON.stringify(updMovies));
   };
 
   const handleMovieSave = (movie) => {
@@ -90,36 +86,21 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
           movieId: m.id,
           nameRU: m.nameRU,
           nameEN: m.nameEN,
-          saved: savedMoviesData.some((s) => (s.movieId === m.id && s.owner === user._id)),
+          saved: savedMoviesData.some((s) => s.movieId === m.id),
         };
       })
     );
   }, [moviesData, savedMoviesData]);
 
   React.useEffect(() => {
-    setMovieStyle(foundMovies.length > 0 ? '' : 'movies_state_empty');
-    if (!isInit && !isShortcuts)
-      sessionStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-  }, [foundMovies]);
+    const displayed = isShortcuts ? filterByShortcut(foundMovies) : foundMovies;
+    setMovieStyle(displayed.length > 0 ? '' : 'movies_state_empty');
+    setDisplayedMovies(displayed);
+  }, [isShortcuts, foundMovies]);
 
   React.useEffect(() => {
-    if (isShortcuts) {
-      setFoundMovies((foundMovies) =>
-        foundMovies.filter((m) => {
-          return m.duration < 40;
-        })
-      );
-    } else {
-      const cached = JSON.parse(sessionStorage.getItem('foundMovies'));
-      if (cached) {
-        setFoundMovies(cached);
-      }
-    }
-  }, [isShortcuts]);
-
-  React.useEffect(() => {
-    let cachedFoundMovies = JSON.parse(sessionStorage.getItem('foundMovies'));
-    const cachedShortcuts = sessionStorage.getItem('shortcuts-movies');
+    let cachedFoundMovies = JSON.parse(localStorage.getItem('foundMovies'));
+    const cachedShortcuts = localStorage.getItem('shortcuts-movies');
     if (cachedFoundMovies) {
       cachedFoundMovies = cachedFoundMovies.map((m) => {
         return {
@@ -128,8 +109,9 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
         };
       });
       setFoundMovies(cachedFoundMovies);
-      sessionStorage.setItem('foundMovies', JSON.stringify(cachedFoundMovies));
-      setIsInit(() => (cachedFoundMovies.length ? false : true));
+      localStorage.setItem('foundMovies', JSON.stringify(cachedFoundMovies));
+      setIsInit(cachedFoundMovies.length ? false : true);
+      setDisplayedMovies(cachedFoundMovies);
     }
     if (cachedShortcuts) {
       setIsShortcuts(true);
@@ -145,12 +127,13 @@ function Movies({ loggedIn, moviesData, savedMoviesData, onSave, onDelete, isLoa
           isShortcuts={isShortcuts}
           onSubmit={handleSubmit}
           onChecked={handleChecked}
+          isLoading={isLoading}
         />
         {!isInit ? (
-          foundMovies.length > 0 ? (
+          displayedMovies.length > 0 ? (
             <MoviesCardList
               isSaved={false}
-              moviesData={foundMovies}
+              moviesData={displayedMovies}
               cardsLimit={cardsLimit}
               onMore={handleMore}
               onSave={handleMovieSave}

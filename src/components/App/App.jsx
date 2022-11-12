@@ -1,7 +1,7 @@
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import './App.css';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -57,9 +57,9 @@ function App() {
     const authorized = localStorage.getItem('auth');
     if (authorized) {
       MainApi.getMe().then((res) => {
-        const { name, email, _id } = res;
+        const { name, email } = res;
         setLoggedIn(true);
-        setUser({ name, email, _id });
+        setUser({ name, email });
       }).catch((err) => {
         setLoggedIn(false);
         localStorage.removeItem('auth');
@@ -81,14 +81,14 @@ function App() {
   const handleSignin = ({ email, password }) => {
     MainApi.signin({ email, password })
       .then((res) => {
-        const { email, name, _id } = res;
-        setUser({ email, name, _id });
+        const { email, name } = res;
+        setUser({ email, name });
         setLoggedIn(true);
         localStorage.setItem('auth', true);
         history.push('/movies');
       })
       .catch((err) => {
-        setApiError(err.message);
+        setApiError(err.message.match('fetch') ? 'Сервер недоступен' : err.message);
       });
   };
 
@@ -100,7 +100,7 @@ function App() {
     MainApi.signout()
       .then(() => {
         setLoggedIn(false);
-        sessionStorage.clear();
+        localStorage.clear();
         localStorage.removeItem('auth');
         history.push('/');
       })
@@ -128,6 +128,7 @@ function App() {
   };
 
   const handleSaveMovie = (movie) => {
+    setIsLoading(true);
     return MainApi.saveMovie(movie)
       .then((res) => {
         savedMoviesData.push(res);
@@ -135,15 +136,21 @@ function App() {
         return res;
       })
       .catch((err) => {
+        const { message } = err;
         setIsToolOpen(true);
         setIsOk(false);
-        setToolMessage(err.message);
+        setToolMessage(message);
+        if (message === 'Пожалуйста авторизуйтесь.') {
+          handleSignout()
+        }
         return Promise.reject(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleDeleteMovie = (movie) => {
     const { _id } = savedMoviesData.find((m) => m.movieId === movie.movieId);
+    setIsLoading(true);
     return MainApi.deleteMovie(_id)
       .then((res) => {
         setSavedMoviesData((savedMoviesData) =>
@@ -152,11 +159,16 @@ function App() {
         return res;
       })
       .catch((err) => {
+        const { message } = err;
         setIsToolOpen(true);
         setIsOk(false);
         setToolMessage(err.message);
+        if (message === 'Пожалуйста авторизуйтесь.') {
+          handleSignout()
+        }
         return Promise.reject(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleGoBack = () => {
@@ -179,6 +191,7 @@ function App() {
           </Route>
           <Route path='/movies'>
             <ProtectedRoute
+              path='/movies'
               loggedIn={loggedIn}
               component={Movies}
               moviesData={moviesData}
@@ -190,6 +203,7 @@ function App() {
           </Route>
           <Route path='/saved-movies'>
             <ProtectedRoute
+              path='/saved-movies'
               loggedIn={loggedIn}
               component={SavedMovies}
               isLoading={isLoading}
@@ -199,6 +213,7 @@ function App() {
           </Route>
           <Route path='/profile'>
             <ProtectedRoute
+              path='/profile'
               loggedIn={loggedIn}
               component={Profile}
               onLogout={handleSignout}
@@ -206,6 +221,7 @@ function App() {
             />
           </Route>
           <Route path='/signup'>
+            {loggedIn && <Redirect to='/movies' /> }
             <Register
               onRegister={handleSignup}
               apiError={apiError}
@@ -213,6 +229,7 @@ function App() {
             />
           </Route>
           <Route path='/signin'>
+            {loggedIn && <Redirect to='/movies' /> }
             <Login
               onLogin={handleSignin}
               apiError={apiError}

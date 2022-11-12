@@ -29,7 +29,7 @@ function Login({ onLogin, apiError, resetApiError }) {
           name='email'
           type='email'
           heading='E-mail'
-          value={values['email']}
+          value={values['email'] || ''}
           onChange={handleChange}
           errText={errors['email']}
         />
@@ -37,7 +37,7 @@ function Login({ onLogin, apiError, resetApiError }) {
           name='password'
           type='password'
           heading='Пароль'
-          value={values['password']}
+          value={values['password'] || ''}
           onChange={handleChange}
           errText={errors['password']}
         />

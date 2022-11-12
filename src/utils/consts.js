@@ -5,10 +5,32 @@ const URLS = {
 }
 
 const REGEX_NAME = /[A-Za-zА-Яа-я-\s]+$/;
-const FETCH_ERR = /'fetch'/;
+const SHORTCUTS_DURATION = 40;
+
+const CARD_LIMIT_COMP = 12;
+const CARD_LIMIT_PAD = 8;
+const CARD_LIMIT_PHONE = 5;
+
+const WIDTH_COMP = 1280;
+const WIDTH_PAD = 768;
+const WIDTH_PHONE = 320;
+
+const INC_COMP = 1280;
+const INC_PAD = 768;
+const INC_PHONE = 320;
+
 
 export {
   URLS,
   REGEX_NAME,
-  FETCH_ERR
+  SHORTCUTS_DURATION,
+  CARD_LIMIT_COMP,
+  CARD_LIMIT_PAD,
+  CARD_LIMIT_PHONE,
+  WIDTH_COMP,
+  WIDTH_PAD,
+  WIDTH_PHONE,
+  INC_COMP,
+  INC_PAD,
+  INC_PHONE
 }
