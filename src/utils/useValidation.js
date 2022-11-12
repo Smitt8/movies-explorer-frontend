@@ -1,5 +1,6 @@
 import React from 'react';
 import { REGEX_NAME } from './consts';
+import { isEmail } from 'validator'
 
 export default function useValidation(user) {
   const [values, setValues] = React.useState({});
@@ -23,6 +24,11 @@ export default function useValidation(user) {
   };
 
   const createMessage = ({ name, value, validationMessage }) => {
+
+    if (name === 'email' && !isEmail(value) && !validationMessage) {
+      return 'Введите корректную электронную почту'
+    }
+
     if (validationMessage) {
       return validationMessage;
     }
