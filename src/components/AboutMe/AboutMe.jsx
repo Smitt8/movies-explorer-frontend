@@ -3,7 +3,6 @@ import photo from '../../images/photo.jpg';
 import Portfolio from '../Portfolio/Portfolio';
 import Title from '../Title/Title';
 import Container from '../Container/Container';
-import { Link } from 'react-router-dom';
 import MainText from '../MainText/MainText';
 
 function AboutMe() {
@@ -26,9 +25,9 @@ function AboutMe() {
             src={photo}
             alt='Фотография молодого человека'
           />
-          <Link className='about-me__link' to='https://github.com/Smitt8'>
+          <a className='about-me__link' href='https://github.com/Smitt8' target='_blank' rel="noreferrer" >
             Github
-          </Link>
+          </a>
         </div>
         <Portfolio />
       </Container>

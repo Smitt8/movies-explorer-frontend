@@ -39,6 +39,10 @@
   transition: opacity .3s ease;
 }
 
+.menu__link_active {
+  border-bottom: 2px solid #fff;
+}
+
 .menu__link_home {
   display: none;
 }
@@ -132,9 +136,6 @@
     font-size: 18px;
     line-height: 22px;
     padding-bottom: 5px;
-  }
-  .menu__link_active {
-    border-bottom: 2px solid #fff;
   }
   .menu__link_home {
     display: block;
